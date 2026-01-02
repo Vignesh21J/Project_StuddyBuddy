@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/',include('base.urls')),
     path('', baseView.Home, name="home"),
+    path('accounts/', include('users.urls')),
 ]
