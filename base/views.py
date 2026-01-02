@@ -1,14 +1,30 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import Room
+from .models import Room, Topic
 
 from .forms import RoomForm
 
+from django.db.models import Q
+
 # Create your views here.
 def Home(request):
-    rooms = Room.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    # print("Search Query:", q)
+    # rooms = Room.objects.filter(topic__name__icontains = q)
+    topics = Topic.objects.all()
+
+    rooms = Room.objects.filter(
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
+    )
+
+    room_count = rooms.count()
+
     context = {
-        'rooms':rooms
+        'rooms':rooms,
+        'topics':topics,
+        'room_count':room_count
     }
 
     return render(request, 'home.html', context)
