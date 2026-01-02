@@ -1,7 +1,17 @@
 from django.contrib import admin
-from .models import Room, Message
+from .models import Room, Message, Topic
 
 # Register your models here.
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+    ]
+    search_fields = [
+        'name',
+    ]
+
+
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = [
