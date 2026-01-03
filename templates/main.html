@@ -13,8 +13,16 @@
     
     {% include "navbar.html" %}
 
+    {% for message in messages %}
+        <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% block content %}
     
     {% endblock content %}
+
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
