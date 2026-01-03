@@ -6,6 +6,9 @@ from .forms import RoomForm
 
 from django.db.models import Q
 
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 # Create your views here.
 def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -29,6 +32,7 @@ def Home(request):
 
     return render(request, 'home.html', context)
 
+@login_required
 def GetRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
     context = {
@@ -36,6 +40,7 @@ def GetRoom(request, pk):
     }
     return render(request, 'base/room.html', context)
 
+@login_required
 def CreateRoom(request):
 
     if request.method == 'POST':
@@ -55,9 +60,14 @@ def CreateRoom(request):
     }
     return render(request, 'base/room_form.html', context)
 
+@login_required
 def UpdateRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
     form = RoomForm(instance=room)
+
+    if request.user != room.host:
+        messages.error(request, 'You are not allowed to edit this room.')
+        return redirect('room', pk=room.id)
 
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=room)
@@ -73,6 +83,7 @@ def UpdateRoom(request, pk):
     return render(request, 'base/room_form.html', context)
 
 
+@login_required
 def DeleteRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
     if request.method == 'POST':

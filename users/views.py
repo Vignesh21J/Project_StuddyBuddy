@@ -10,10 +10,12 @@ from .forms import RegisterUserForm
 
 from .forms import LoginUserForm
 
-from django.views.decorators.http import require_POST
 
 # Create your views here.
 def RegisterView(request):
+
+    if request.user.is_authenticated:
+        return redirect('home')
     
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
@@ -34,6 +36,10 @@ def RegisterView(request):
     return render(request, 'users/register.html', context)
 
 def LoginView(request):
+
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
 
@@ -50,8 +56,14 @@ def LoginView(request):
     return render(request, "users/login.html", {"form": form})
 
 
-@require_POST
 def LogoutView(request):
+
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    if request.method != 'POST':
+        return render(request,'405.html', status=405)
+    
     logout(request)
     messages.success(request, "Logged out successfully.")
     return redirect('login')
