@@ -5,6 +5,11 @@
     <input type="text" name="q" placeholder="Search Rooms.." />
 </form>
 
+{% if request.user.is_authenticated %}
+    <h3>Hello {{request.user.username}}!</h3>
+    <hr>
+{% endif %}
+
 {% if not request.user.is_authenticated %}
     <a href="{% url 'login' %}">Login</a>
     <a href="{% url 'register' %}">Register</a>

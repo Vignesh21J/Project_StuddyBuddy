@@ -33,11 +33,6 @@
                 <a href="{% url 'create-room' %}">Create Room</a>
             {% endif %}
 
-            {% if request.user.is_authenticated %}
-                <h3>Hello {{request.user.username}}!</h3>
-                <hr>
-            {% endif %}
-
             <div>
                 {% for room in rooms %}
                     <div>

@@ -9,6 +9,10 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from .models import Message
+# from django.http import HttpResponseForbidden
+from django.core.exceptions import PermissionDenied
+
 # Create your views here.
 def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -35,8 +39,22 @@ def Home(request):
 @login_required
 def GetRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
+    room_messages = room.message_set.all().order_by('created')      # reverse lookup
+    participants = room.participants.all()
+
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user = request.user,
+            room = room,
+            body = request.POST.get('body')
+        )
+        room.participants.add(request.user)
+        return redirect('room', pk=room.id)
+
     context = {
-        'room':room
+        'room':room,
+        'room_messages':room_messages,
+        'participants':participants
     }
     return render(request, 'base/room.html', context)
 
@@ -86,10 +104,32 @@ def UpdateRoom(request, pk):
 @login_required
 def DeleteRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
+
+    if request.user != room.host:
+        messages.error(request, 'You are not allowed to delete this room.')
+        return redirect('room', pk=room.id)
+    
     if request.method == 'POST':
         room.delete()
         return redirect('home')
+    
     context = {
         'obj':room
     }
     return render(request, 'base/delete.html', context)
+
+@login_required
+def DeleteMessage(request, pk):
+    message = get_object_or_404(Message, id=pk)
+    
+    if request.user == message.user:
+        room_id = message.room.id
+
+        message.delete()
+        messages.success(request, "Message deleted.")
+
+        return redirect('room', pk=room_id)
+    # else:
+    #     return HttpResponseForbidden("You're not allowed to delete this message.")
+
+    raise PermissionDenied
