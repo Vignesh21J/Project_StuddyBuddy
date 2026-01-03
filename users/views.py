@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -9,6 +9,8 @@ from django.contrib import messages
 from .forms import RegisterUserForm
 
 from .forms import LoginUserForm
+
+from base.models import Room, Topic
 
 
 # Create your views here.
@@ -67,3 +69,16 @@ def LogoutView(request):
     logout(request)
     messages.success(request, "Logged out successfully.")
     return redirect('login')
+
+
+def UserProfile(request, pk):
+
+    user = get_object_or_404(User, id=pk)
+    rooms = user.room_set.all()
+    topics = Topic.objects.all()
+    context = {
+        'user':user,
+        'rooms':rooms,
+        'topics':topics
+    }
+    return render(request, "users/profile.html", context)
