@@ -148,6 +148,18 @@ a {
     margin: 3rem;
 }
 
+@media screen and (max-width: 900px) {
+    .topics {
+        display: none;
+    }
+
+    .layout--3 > .container > div:nth-child(2) {
+        flex-basis: 100%;
+    }
+}
+
+
+
 .btn {
     background-color: transparent;
     border: none;
@@ -172,15 +184,110 @@ a {
 }
 
 .btn--link {
-  border-radius: 0;
-  padding: 0;
-  color: var(--color-main);
-  box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    color: var(--color-main);
+    box-shadow: none;
 }
 
 .btn--link:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
+.btn--dark {
+    background-color: var(--color-dark-light);
+    color: var(--color-light);
+}
+
+.btn > svg {
+    fill: currentColor;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.btn--pill {
+    border-radius: 10rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 6px 2.5rem;
+    color: var(--color-main);
+    background: transparent;
+    border: 2px solid var(--color-main);
+}
+
+.action-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    z-index: 111;
+    position: absolute;
+    top: 5rem;
+    right: 0.5rem;
+    background: var(--color-dark-light);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu .dropdown-link {
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    background: transparent;
+    border: none;
+
+    color: var(--color-light);
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+
+.dropdown-menu .dropdown-link:hover {
+    background-color: var(--color-dark-medium);
+}
+
+
+.dropdown-menu > *:not(:last-child) .dropdown-link {
+    border-bottom: 1px solid var(--color-dark-medium);
+}
+
+.dropdown-menu .dropdown-link svg {
+    fill: var(--color-light);
+}
+
+
+.mobile-menu {
+    margin-bottom: 3rem;
+}
+
+.mobile-menuItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+
 
 @media screen and (min-width: 218px) and (max-width: 260px) {
     .layout__box {
@@ -215,6 +322,28 @@ a {
         box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
+}
+
+
+/*================== Room List ===================*/
+
+.roomList__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.4rem;
+}
+
+.roomList__header h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-light);
+  letter-spacing: 1px;
+}
+
+.roomList__header p {
+  font-weight: 500;
+  color: var(--color-dark-light);
 }
 
 
@@ -490,4 +619,222 @@ a {
 
 .form__avatar label:hover {
     text-decoration: underline;
+}
+
+
+.dropdown-link-form {
+    display: inline;
+    margin: 0;
+}
+
+
+
+/*==================== Header Section =======================*/
+
+.header {
+  padding: 2rem;  
+  border-radius: 10px;
+  background-color: var(--color-dark);
+}
+
+
+.header__flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header > .container {
+  display: flex;
+  gap: 9.5rem;
+}
+
+
+.header__logo,
+.header__user {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header__logo > img {
+  height: 3.2rem;
+  width: 3.2rem;
+}
+
+.header__logo > h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--color-light);
+}
+
+.header__search > label {
+  background-color: var(--color-dark-medium);
+  padding: 1.3rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 4px;
+}
+
+.header__search svg {
+  fill: var(--color-gray);
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+
+.header__search input {
+  width: 30rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-light);
+}
+
+@media screen and (max-width: 800px) {
+  .header__search input {
+    width: 20rem;
+  }
+
+  .header > .container {
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .header__logo h1 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header__search {
+    display: none;
+  }
+}
+
+.header__menu {
+  position: relative;
+}
+
+.header__menu a {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-gray);
+}
+
+.header__menu img {
+  height: 3.6rem;
+}
+
+.header__menu p {
+  line-height: 1.2;
+}
+
+.header__menu span {
+  color: var(--color-main);
+  font-weight: 500;
+  font-size: 1.4rem;
+  display: block;
+}
+
+.header__menu svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: var(--color-dark-light);
+}
+
+.dropdown-button {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.dropdown-button:hover svg {
+  fill: var(--color-main);
+}
+
+
+/*==============  Layout ==============*/
+
+.layout {
+  margin-top: 2.4rem;
+}
+
+/* 2-column grid for all larger screens */
+.layout > .container {
+  display: grid;
+  grid-template-columns: 22% 1fr;     /* 22% sidebar, the rest is main */
+  gap: 5rem;                          /* 3rem gap as requested */
+  align-items: flex-start;
+}
+
+
+/* --- Responsive: Stack (mobile) --- */
+@media (max-width: 900px) {
+  .layout > .container {
+    grid-template-columns: 1fr;     /* One column only — stacked layout */
+    gap: 0;                         /* Remove the gap for stacked layout */
+  }
+}
+
+
+
+/* Apply margin-left: 2rem only for screens wider than 395px */
+@media (min-width: 396px) {
+  .my-icon {
+    margin-left: 2rem;
+  }
+}
+
+
+
+
+/*==================== Profile ====================*/
+.profile {
+    margin-bottom: 3rem;
+}
+
+.profile__avatar {
+    text-align: center;
+}
+
+.profile__info {
+    text-align: center;
+}
+
+.profile__info h3 {
+    font-size: 2rem;
+    color: var(--color-light);
+    font-weight: 400;
+}
+
+.profile__info p {
+    color: var(--color-main);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.profile__about {
+    margin-top: 2rem;
+}
+
+.profile__about h3 {
+    text-transform: uppercase;
+    color: var(--color-dark-light);
+    margin-bottom: 0.5rem;
+}
+
+.profile-page .roomList__header {
+    margin-bottom: 1.5rem;
+}
+
+.profile-page .roomList__header h2 {
+    color: var(--color-dark-light);
 }
