@@ -6,6 +6,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     bio = models.TextField(null=True, blank=True)
 
+    avatar = models.ImageField(upload_to='studdybuddy_media_files', default='avatar.svg', null=True, blank=True)
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 

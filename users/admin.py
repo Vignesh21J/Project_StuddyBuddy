@@ -18,11 +18,15 @@ class CustomUserAdmin(UserAdmin):
     ordering = ("email",)
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {"fields": ("bio",)}),
+        (None, {
+            "fields": ("bio","avatar"),
+        }),
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {"fields": ("email",)}),
+        (None, {
+            "fields": ("email", "avatar")
+        }),
     )
 
     search_fields = ("email", "username")
