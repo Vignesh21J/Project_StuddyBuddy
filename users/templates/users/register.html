@@ -74,6 +74,7 @@
                     <div class="auth__action">
                         <p>Already have an account? <a href="{% url 'login' %}" class="btn btn--link">Login</a></p>
                     </div>
+                    {% include "users/social_logins.html" %}
                 </div>
             </div>
         </div>
