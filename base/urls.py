@@ -8,4 +8,6 @@ urlpatterns = [
     path('delete-room/<int:pk>/', views.DeleteRoom, name="delete-room"),
 
     path('delete-message/<int:pk>', views.DeleteMessage , name='delete-message'),
+
+    path('topics/', views.TopicPage , name="topics"),
 ]

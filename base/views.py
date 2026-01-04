@@ -27,11 +27,13 @@ def Home(request):
     )
 
     room_count = rooms.count()
+    topics_count = topics.count()
 
     context = {
         'rooms':rooms,
         'topics':topics,
-        'room_count':room_count
+        'room_count':room_count,
+        'topics_count':topics_count
     }
 
     return render(request, 'home.html', context)
@@ -135,3 +137,18 @@ def DeleteMessage(request, pk):
     #     return HttpResponseForbidden("You're not allowed to delete this message.")
 
     raise PermissionDenied
+
+
+def TopicPage(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    topics = Topic.objects.filter(name__icontains=q)
+
+    topics_count = topics.count()
+
+    context = {
+        'topics':topics,
+        'topics_count':topics_count
+    }
+
+    return render(request, 'base/topics.html', context)

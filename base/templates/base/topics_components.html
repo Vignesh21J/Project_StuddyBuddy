@@ -9,12 +9,12 @@
 
         <ul class="topics__list">
             <li>
-                <a href="{% url 'home' %}" class="active">All <span>{{topics.count}}</span></a>
+                <a href="{% url 'home' %}" class="active">All <span>{{ topics_count }}</span></a>
             </li>
 
             {% for t in topics %}
                 <li>
-                    <a href="{% url 'home' %}?q={{t.name}}">{{t.name}} <span>{{t.room_set.all.count}}</span></a>
+                    <a href="{% url 'home' %}?q={{t.name}}">{{ t.name }} <span>{{ t.room_set.all.count }}</span></a>
                 </li>
             {% endfor %}
             
