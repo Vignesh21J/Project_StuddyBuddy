@@ -63,23 +63,29 @@ def GetRoom(request, pk):
 @login_required
 def CreateRoom(request):
 
-    if request.method == 'POST':
-        form = RoomForm(request.POST)
+    topics = Topic.objects.all()
 
-        if form.is_valid():
-            room = form.save(commit=False)
-            room.host = request.user
-            room.save()
-            return redirect('home')
-        else:
-            print(form.errors)
+    if request.method == 'POST':
+        topic_name = request.POST.get('topic_entered')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+
+        Room.objects.create(
+            host = request.user,
+            topic = topic,
+
+            name = request.POST.get('name'),
+            description = request.POST.get('description')
+        )
+        return redirect('home')
 
     else:
         form = RoomForm()
 
     context = {
-        'form':form
+        'form':form,
+        'topics':topics
     }
+
     return render(request, 'base/room_form.html', context)
 
 @login_required
@@ -87,21 +93,27 @@ def UpdateRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
     form = RoomForm(instance=room)
 
+    topics = Topic.objects.all()
+
     if request.user != room.host:
         messages.error(request, 'You are not allowed to edit this room.')
         return redirect('room', pk=room.id)
 
     if request.method == 'POST':
-        form = RoomForm(request.POST, instance=room)
+        topic_name = request.POST.get('topic_entered')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
 
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            print(form.errors)
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
+        return redirect('home')
     context = {
-        'form':form
+        'form':form,
+        'topics':topics,
+        'room':room
     }
+    
     return render(request, 'base/room_form.html', context)
 
 

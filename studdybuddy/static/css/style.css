@@ -506,7 +506,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 4rem;
+    padding-top: 2rem;
 }
 
 .create-room.layout .layout__box {
@@ -949,4 +949,53 @@ a {
     justify-content: center;
     align-items: flex-start;
     padding-top: 4rem;
+}
+
+
+.abc {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*================== Auth ===================*/
+
+.auth__tagline {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-main);
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+.auth .layout__boxHeader {
+  text-align: center;
+  justify-content: center;
+}
+
+.auth__action {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/*================ Password1 and Password2 =====================*/
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.password-wrapper i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
 }

@@ -16,7 +16,7 @@ class RegisterUserForm(UserCreationForm):
         }
         widgets = {
             "username": forms.TextInput(attrs={
-                "placeholder": "Enter your first_name and last_name"
+                "placeholder": "Enter your Username"
             }),
             "email": forms.EmailInput(attrs={
                 "placeholder": "Enter your email address"
@@ -35,17 +35,7 @@ class RegisterUserForm(UserCreationForm):
     
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.EmailField(
-        label='Email',
-        widget=forms.EmailInput(attrs={
-            "placeholder": "Enter your email address"
-        })
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.fields["password"].widget.attrs["placeholder"] = "Enter password"
+    username = forms.EmailField(label="Email")
 
 
 class EditUserForm(forms.ModelForm):
