@@ -106,14 +106,10 @@ a {
 /*========== Layout Box ==========*/
 
 .layout__box {
-    width: 90%;
-    max-width: 48rem;
+    width: 100%;
+    max-width: 60rem;
     min-height: 35rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     margin-top: 3rem;
-    transform: translate(-50%, -46%);
     background-color: var(--color-dark);
     border-radius: 1rem;
     box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
@@ -146,41 +142,6 @@ a {
 
 .layout__body {
     margin: 3rem;
-}
-
-@media screen and (min-width: 218px) and (max-width: 260px) {
-    .layout__box {
-        width: 90%;
-        max-width: 48rem;
-        min-height: 35rem;
-        position: absolute;
-        top: 52%;
-        left: 50%;
-        margin-top: 3rem;
-        transform: translate(-50%, -46%);
-        background-color: var(--color-dark);
-        border-radius: 1rem;
-        box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
-}
-
-
-@media screen and (min-width: 0px) and (max-width: 218px) {
-    .layout__box {
-        width: 90%;
-        max-width: 48rem;
-        min-height: 35rem;
-        position: absolute;
-        top: 57%;
-        left: 50%;
-        margin-top: 3rem;
-        transform: translate(-50%, -46%);
-        background-color: var(--color-dark);
-        border-radius: 1rem;
-        box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
 }
 
 
@@ -541,9 +502,23 @@ a {
 
 /*============ Create Room =================*/
 
+.create-room.layout > .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4rem;
+}
+
 .create-room.layout .layout__box {
     max-width: 60rem;
 }
+
+@media (max-width: 900px) and (orientation: landscape) {
+    .layout {
+        padding-top: 12rem;
+    }
+}
+
 
 
 .form__group {
@@ -631,139 +606,140 @@ a {
 /*==================== Header Section =======================*/
 
 .header {
-  padding: 2rem;  
-  border-radius: 10px;
-  background-color: var(--color-dark);
+    padding: 2rem;  
+    border-radius: 10px;
+    background-color: var(--color-dark);
 }
 
 
 .header__flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .header > .container {
-  display: flex;
-  gap: 9.5rem;
+    display: flex;
+    gap: 9.5rem;
 }
 
 
 .header__logo,
 .header__user {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 }
 
 .header__logo > img {
-  height: 3.2rem;
-  width: 3.2rem;
+    height: 3.2rem;
+    width: 3.2rem;
 }
 
 .header__logo > h1 {
-  font-weight: 700;
-  font-size: 2rem;
-  color: var(--color-light);
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--color-light);
 }
 
 .header__search > label {
-  background-color: var(--color-dark-medium);
-  padding: 1.3rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 4px;
+    background-color: var(--color-dark-medium);
+    padding: 1.3rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 4px;
 }
 
 .header__search svg {
-  fill: var(--color-gray);
-  width: 2rem;
-  height: 2rem;
-  margin-left: 1rem;
+    fill: var(--color-gray);
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
 }
 
 .header__search input {
-  width: 30rem;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--color-light);
+    width: 30rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-light);
 }
 
 @media screen and (max-width: 800px) {
-  .header__search input {
-    width: 20rem;
-  }
+    .header__search input {
+        width: 20rem;
+    }
 
-  .header > .container {
-    gap: 3rem;
-  }
+    .header > .container {
+        gap: 3rem;
+    }
 }
 
 @media screen and (max-width: 700px) {
-  .header__logo h1 {
-    display: none;
-  }
+    .header__logo h1 {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 500px) {
-  .header__search {
-    display: none;
-  }
+    .header__search {
+        display: none;
+    }
 }
 
 .header__menu {
-  position: relative;
+    position: relative;
 }
 
 .header__menu a {
-  display: flex;
-  gap: 1.1rem;
-  align-items: center;
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--color-gray);
+    display: flex;
+    gap: 1.1rem;
+    align-items: center;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-gray);
 }
 
 .header__menu img {
-  height: 3.6rem;
+    height: 3.6rem;
 }
 
 .header__menu p {
-  line-height: 1.2;
+    line-height: 1.2;
 }
 
 .header__menu span {
-  color: var(--color-main);
-  font-weight: 500;
-  font-size: 1.4rem;
-  display: block;
+    color: var(--color-main);
+    font-weight: 500;
+    font-size: 1.4rem;
+    display: block;
 }
 
 .header__menu svg {
-  width: 1.6rem;
-  height: 1.6rem;
-  fill: var(--color-dark-light);
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: var(--color-dark-light);
 }
 
 .dropdown-button {
-  background: transparent;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
 }
 
 .dropdown-button:hover svg {
-  fill: var(--color-main);
+    fill: var(--color-main);  
 }
 
 
 /*============== Layout ==============*/
 
 .layout {
-  margin-top: 2.4rem;
+    padding-top: 3rem;
+    min-height: calc(100vh - 10rem);
 }
 
 /* 2-column grid for all larger screens */
@@ -854,81 +830,123 @@ a {
 }
 
 
+/* Profile page Layout override */
+.layout.layout--3 > .container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.layout.layout--3 .roomList {
+    max-width: 75rem;
+    width: 100%;
+}
+
+.layout.layout--3 {
+    padding-top: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+    .layout.layout--3 .roomList {
+        max-width: 100%;
+    }
+    .layout.layout--3 > .container {
+        justify-content: flex-start;
+    }
+}
+
+
+
+
 
 
 .avatar {
-  position: relative;
-  display: inline-block;
-  border-radius: 50%;
-  border: 2px solid var(--color-main);
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid var(--color-main);
 }
 
 .avatar img {
-  display: block;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .avatar::after {
-  content: "";
-  display: block;
-  position: absolute;
-  background-color: var(--color-gray);
-  z-index: 111;
-  border-radius: 50%;
-  border: 0.3rem solid var(--color-dark);
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: var(--color-gray);
+    z-index: 111;
+    border-radius: 50%;
+    border: 0.3rem solid var(--color-dark);
 }
 
 .avatar.active::after {
-  background-color: var(--color-success);
+    background-color: var(--color-success);
 }
 
 .avatar.avatar--small img {
-  width: 2.8rem;
-  height: 2.8rem;
+    width: 2.8rem;
+    height: 2.8rem;
 }
 
 .avatar.avatar--small:after {
-  width: 0.7rem;
-  height: 0.7rem;
-  bottom: 0px;
-  right: -6px;
+    width: 0.7rem;
+    height: 0.7rem;
+    bottom: 0px;
+    right: -6px;
 }
 
 .avatar.avatar--medium img {
-  width: 3.6rem;
-  height: 3.6rem;
-  border-radius: 50%;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
 }
 
 .avatar.avatar--medium:after {
-  width: 0.7rem;
-  height: 0.7rem;
-  bottom: 0px;
-  right: -6px;
+    width: 0.7rem;
+    height: 0.7rem;
+    bottom: 0px;
+    right: -6px;
 }
 
 .avatar.avatar--large img {
-  display: block;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
 }
 
 .avatar.avatar--large:after {
-  width: 1rem;
-  height: 1rem;
-  bottom: 2px;
-  right: 3.5px;
+    width: 1rem;
+    height: 1rem;
+    bottom: 2px;
+    right: 3.5px;
 }
 
 .scroll::-webkit-scrollbar {
-  width: 0.6rem;
-  background-color: rgb(41, 41, 46);
+    width: 0.6rem;
+    background-color: rgb(41, 41, 46);
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background-color: var(--color-gray);
+    border-radius: 1rem;
+    background-color: var(--color-gray);
+}
+
+
+
+/*===================== Update Account =====================*/
+
+.update-account.layout .layout__box {
+    max-width: 60rem;
+}
+
+.update-account.layout > .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4rem;
 }

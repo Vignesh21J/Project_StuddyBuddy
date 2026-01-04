@@ -7,7 +7,11 @@
     {% load static %}
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>StuddyBuddy</title>
+    <title>
+        {% block title %}
+            StuddyBuddy
+        {% endblock title %}
+    </title>
 </head>
 <body>
     

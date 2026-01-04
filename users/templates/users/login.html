@@ -5,6 +5,8 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
 
+            <input type="hidden" name="next" value="{{ next }}">
+
             <label>Email:</label>
             <input type="email" name="username" placeholder="Enter Your Email Address">
 
