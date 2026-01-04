@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block title %}
-    Register - StuddyBuddy
+    Login - StuddyBuddy
 {% endblock title %}
 
 {% block content %}
@@ -61,6 +61,7 @@
 
                     <div class="auth__action">
                         <p>Haven't signed up yet? <a href="{% url 'register' %}" class="btn btn--link">Sign Up</a></p>
+                        <p>Forgot your password? <a href="{% url 'forgot-password' %}" class="btn btn--link">Forgot Password</a></p>
                     </div>                    
                 </div>
             </div>

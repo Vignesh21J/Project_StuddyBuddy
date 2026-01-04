@@ -18,7 +18,7 @@ def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     # print("Search Query:", q)
     # rooms = Room.objects.filter(topic__name__icontains = q)
-    topics = Topic.objects.all()
+    topics = Topic.objects.all()[0:6]
 
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q) |
@@ -27,7 +27,7 @@ def Home(request):
     )
 
     room_count = rooms.count()
-    topics_count = topics.count()
+    topics_count = Topic.objects.count()
 
     context = {
         'rooms':rooms,
