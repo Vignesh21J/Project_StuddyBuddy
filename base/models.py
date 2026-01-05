@@ -17,7 +17,7 @@ class Room(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name='joined_rooms', blank=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -30,7 +30,7 @@ class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
