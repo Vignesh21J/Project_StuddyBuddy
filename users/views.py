@@ -25,6 +25,9 @@ from django.utils import timezone
 from django.db.models import Count
 
 
+from django_ratelimit.decorators import ratelimit
+
+
 # Create your views here.
 
 @unauthenticated_user
@@ -50,6 +53,7 @@ def RegisterView(request):
 
 
 @unauthenticated_user
+@ratelimit(key='ip', rate='8/m', block=True)
 def LoginView(request):
 
     next_url = request.GET.get('next') or request.POST.get('next')

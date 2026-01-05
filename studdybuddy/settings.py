@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
 ]
 
+RATELIMIT_VIEW = 'base.views.ratelimit_blocked'
+
 SITE_ID = 1
 
 AUTH_USER_MODEL = 'users.User'

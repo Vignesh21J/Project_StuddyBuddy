@@ -20,6 +20,8 @@ from .models import MessageFile
 
 from django.db.models import Count
 
+from django_ratelimit.decorators import ratelimit
+
 
 # Create your views here.
 def Home(request):
@@ -52,6 +54,7 @@ def Home(request):
 
 
 @login_required
+@ratelimit(key='user', rate='20/m', method='POST', block=True)
 def GetRoom(request, pk):
     room = get_object_or_404(
         Room.objects
@@ -112,6 +115,7 @@ def GetRoom(request, pk):
     return render(request, 'base/room.html', context)
 
 @login_required
+@ratelimit(key='user', rate='30/h', block=True)
 def CreateRoom(request):
 
     topics = Topic.objects.only("id","name")
@@ -234,3 +238,7 @@ def TopicPage(request):
     }
 
     return render(request, 'base/topics.html', context)
+
+
+def ratelimit_blocked(request, exception):
+    return render(request, '429.html', status=429)
