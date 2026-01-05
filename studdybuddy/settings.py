@@ -168,11 +168,12 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 
-ACCOUNT_ADAPTER = "base.adapters.CustomAccountAdapter"
-SOCIALACCOUNT_ADAPTER = "base.adapters.MySocialAccountAdapter"
+ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "users.adapters.MySocialAccountAdapter"
 
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/logout/'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 
 # Core Allauth configuration
 ACCOUNT_LOGIN_METHODS = {'email'}

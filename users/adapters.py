@@ -1,12 +1,13 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from django.shortcuts import resolve_url
 
-# For redirecting user after login
 class CustomAccountAdapter(DefaultAccountAdapter):
     def get_login_redirect_url(self, request):
         
-        # Redirect all users to update-users page
-        return resolve_url('home')  # Make sure this name exists in urls.py
+        next_url = request.GET.get('next') or request.POST.get('next')
+        if next_url:
+            return next_url
+        return resolve_url('home')
 
 
 
@@ -15,23 +16,22 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-# For linking existing users via email during social login
 class MySocialAccountAdapter(DefaultSocialAccountAdapter):
     def pre_social_login(self, request, sociallogin):
-        # Skip if user is already logged in
         if request.user.is_authenticated:
             return
 
-        # Get email from social provider
         email = sociallogin.user.email
         if email:
             try:
-                # Try to find an existing user with this email
                 user = User.objects.get(email=email)
-                sociallogin.user = user  # Link the existing user
+                sociallogin.user = user
             except User.DoesNotExist:
-                pass  # Let Allauth create a new user if not found
+                pass
 
 
     def get_login_redirect_url(self, request):
+        next_url = request.GET.get('next') or request.POST.get('next')
+        if next_url:
+            return next_url
         return resolve_url('home')

@@ -38,7 +38,13 @@
 
                 <div class="roomList__header">
                     <div>
-                        <h2>Study Rooms Hosted by <a>{{user.username}}</a>
+                        <h2>Totally <strong>{{ rooms_count }}</strong> Study 
+                            {% if rooms_count == 1 %}
+                              Room 
+                            {% else %}
+                                Rooms 
+                            {% endif %}
+                            Hosted by <a>{{user.username}}</a>
                         </h2>
                     </div>
                 </div>

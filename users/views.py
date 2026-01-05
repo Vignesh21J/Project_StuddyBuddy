@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -67,7 +67,8 @@ def LoginView(request):
             messages.success(request, "Logged In Successfully!")
 
             if next_url:
-                return redirect(next_url)
+                return redirect(resolve_url(next_url))
+            
             return redirect("home")
         
         else:
@@ -101,11 +102,13 @@ def UserProfile(request, pk):
 
     user = get_object_or_404(User, id=pk)
     rooms = user.room_set.all()
+    rooms_count = rooms.count()
     topics = Topic.objects.all()
     context = {
         'user':user,
         'rooms':rooms,
-        'topics':topics
+        'topics':topics,
+        'rooms_count':rooms_count
     }
     return render(request, "users/profile.html", context)
 
