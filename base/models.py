@@ -35,3 +35,13 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:30]
+    
+
+from django.template.defaultfilters import filesizeformat
+
+class MessageFile(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='files')
+    file = models.FileField(upload_to='chat_uploads/')
+
+    def get_size(self):
+        return filesizeformat(self.file.size)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room, Message, Topic
+from .models import Room, Message, Topic, MessageFile
 
 # Register your models here.
 @admin.register(Topic)
@@ -35,3 +35,5 @@ class MessageAdmin(admin.ModelAdmin):
         'user',
         'room',
     ]
+
+admin.site.register(MessageFile)

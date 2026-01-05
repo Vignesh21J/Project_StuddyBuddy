@@ -9,6 +9,7 @@ urlpatterns = [
     path('delete-room/<int:pk>/', views.DeleteRoom, name="delete-room"),
 
     path('delete-message/<int:pk>', views.DeleteMessage , name='delete-message'),
+    path('delete-file/<int:file_id>/', views.DeleteFile, name='delete-file'),
 
     path('topics/', views.TopicPage , name="topics"),
 ]

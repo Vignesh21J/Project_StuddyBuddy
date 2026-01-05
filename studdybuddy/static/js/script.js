@@ -34,3 +34,36 @@ document.querySelectorAll(".toggle-password").forEach(icon => {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.getElementById('file-upload');
+    const fileCountSpan = document.getElementById('file-count');
+    const chatForm = document.querySelector('.chat-form');
+
+    // Only run if file input exists
+    if (fileInput && fileCountSpan) {
+
+        fileInput.addEventListener('change', () => {
+            const count = fileInput.files.length;
+
+            if (count === 0) {
+                fileCountSpan.textContent = '';
+            } else if (count === 1) {
+                fileCountSpan.textContent = '1 file selected';
+            } else {
+                fileCountSpan.textContent = `${count} files selected`;
+            }
+        });
+    }
+
+    // Clear file count on form submit
+    if (chatForm && fileCountSpan) {
+        chatForm.addEventListener('submit', () => {
+            fileCountSpan.textContent = '';
+        });
+    }
+});
+
+const conversationThread = document.querySelector(".room__box");
+if (conversationThread) conversationThread.scrollTop = conversationThread.scrollHeight;
