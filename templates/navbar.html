@@ -5,7 +5,6 @@
 
         <div class="header__flex">
             <div>
-                <!-- Logo -->
                 <a href="{% url 'home' %}" class="header__logo">
                     <img src="{% static 'images/logo.svg' %}" alt="Logo" />
                     <h1>StuddyBuddy</h1>
@@ -14,7 +13,6 @@
             </div>
             
             <div>
-                <!-- Search Form -->
                 <form method="GET" action="{% url 'home' %}" class="header__search">
                     <label>
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -33,7 +31,7 @@
 
             <nav class="header__menu">
             
-                {% if request.user.is_authenticated %}  <!-- Logged In -->
+                {% if request.user.is_authenticated %}
                     <div class="header__user">
 
                         <a href="{% url 'user-profile' request.user.id %}">

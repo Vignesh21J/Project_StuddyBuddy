@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileCountSpan = document.getElementById('file-count');
     const chatForm = document.querySelector('.chat-form');
 
-    // Only run if file input exists
     if (fileInput && fileCountSpan) {
 
         fileInput.addEventListener('change', () => {
@@ -57,13 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Clear file count on form submit
     if (chatForm && fileCountSpan) {
         chatForm.addEventListener('submit', () => {
             fileCountSpan.textContent = '';
         });
     }
 });
+
 
 const conversationThread = document.querySelector(".room__box");
 if (conversationThread) conversationThread.scrollTop = conversationThread.scrollHeight;
