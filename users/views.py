@@ -22,14 +22,13 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.utils import timezone
 
+from django.db.models import Count
+
 
 # Create your views here.
 
 @unauthenticated_user
 def RegisterView(request):
-
-    if request.user.is_authenticated:
-        return redirect('home')
     
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
@@ -53,9 +52,6 @@ def RegisterView(request):
 @unauthenticated_user
 def LoginView(request):
 
-    if request.user.is_authenticated:
-        return redirect('home')
-    
     next_url = request.GET.get('next') or request.POST.get('next')
     
     if request.method == "POST":
@@ -101,9 +97,17 @@ def LogoutView(request):
 def UserProfile(request, pk):
 
     user = get_object_or_404(User, id=pk)
-    rooms = user.room_set.all()
+    
+    rooms = (
+        user.room_set
+        .select_related("host", "topic")
+        .prefetch_related("participants")
+        .annotate(participants_count=Count("participants"))
+    )
+
     rooms_count = rooms.count()
     topics = Topic.objects.all()
+    
     context = {
         'user':user,
         'rooms':rooms,

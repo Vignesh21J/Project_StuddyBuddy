@@ -15,17 +15,27 @@ from django.core.exceptions import PermissionDenied
 
 from .models import MessageFile
 
+# from django.db import connection
+# connection.queries.clear()
+
+from django.db.models import Count
+
+
 # Create your views here.
 def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    # print("Search Query:", q)
-    # rooms = Room.objects.filter(topic__name__icontains = q)
+    
     topics = Topic.objects.all()[0:6]
 
-    rooms = Room.objects.filter(
-        Q(topic__name__icontains=q) |
-        Q(name__icontains=q) |
-        Q(description__icontains=q)
+    rooms = (
+        Room.objects.select_related('host','topic')
+        .prefetch_related('participants')
+        .annotate(participants_count=Count("participants"))
+        .filter(
+            Q(topic__name__icontains=q) |
+            Q(name__icontains=q) |
+            Q(description__icontains=q)
+        )
     )
 
     room_count = rooms.count()
@@ -40,11 +50,22 @@ def Home(request):
 
     return render(request, 'home.html', context)
 
+
 @login_required
 def GetRoom(request, pk):
-    room = get_object_or_404(Room, id=pk)
+    room = get_object_or_404(
+        Room.objects
+        .select_related("host", "topic")
+        .prefetch_related(
+            "participants",
+            "message_set__user",
+            "message_set__files"
+        ),
+        id=pk
+    )
     room_messages = room.message_set.all().order_by('created')
     participants = room.participants.all()
+
 
     if request.method == 'POST':
 
@@ -93,7 +114,7 @@ def GetRoom(request, pk):
 @login_required
 def CreateRoom(request):
 
-    topics = Topic.objects.all()
+    topics = Topic.objects.only("id","name")
 
     if request.method == 'POST':
         topic_name = request.POST.get('topic_entered')
@@ -186,17 +207,24 @@ def DeleteMessage(request, pk):
 def DeleteFile(request, file_id):
     file = get_object_or_404(MessageFile, id=file_id)
 
-    if file.message.user == request.user:
-        file.delete()
+    if file.message.user != request.user:
+        raise PermissionDenied
     
-    return redirect('room', pk=file.message.room.id)
+    room_id = file.message.room.id
+    file.delete()
+    
+    return redirect('room', pk=room_id)
 
 
 
 def TopicPage(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    topics = Topic.objects.filter(name__icontains=q)
+    topics = (
+        Topic.objects
+        .filter(name__icontains=q)
+        .annotate(room_count=Count('room'))
+    )
 
     topics_count = topics.count()
 
