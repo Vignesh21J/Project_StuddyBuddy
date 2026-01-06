@@ -20,7 +20,7 @@ It allows users to discuss, share ideas, and collaborate openly instead of learn
 
 ---
 
-## 🌍 Important Concept
+## Important Concept
 
 > **All rooms and topics are public.**
 > There are **no private rooms** on StuddyBuddy.
@@ -29,7 +29,7 @@ This design encourages **open learning**, discovery of discussions, and communit
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 
@@ -51,7 +51,7 @@ This design encourages **open learning**, discovery of discussions, and communit
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Project_StuddyBuddy/
@@ -69,16 +69,16 @@ Project_StuddyBuddy/
 
 ---
 
-## ⚙️ Installation & Setup (Local)
+## Installation & Setup (Local)
 
-### 1️⃣ Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/your-username/studdybuddy.git
 cd studdybuddy
 ```
 
-### 2️⃣ Create virtual environment
+### Create virtual environment
 
 ```bash
 python -m venv venv
@@ -86,13 +86,13 @@ source venv/bin/activate   # Linux / Mac
 venv\Scripts\activate      # Windows
 ```
 
-### 3️⃣ Install dependencies
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Environment variables
+### Environment variables
 
 Create a `.env` file and add:
 
@@ -114,30 +114,30 @@ OAUTH_GITHUB_SECRET=your_github_secret
 
 ---
 
-### 5️⃣ Run migrations
+### Run migrations
 
 ```bash
 python manage.py migrate
 ```
 
-### 6️⃣ Create superuser
+### Create superuser
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 7️⃣ Run the server
+### Run the server
 
 ```bash
 python manage.py runserver
 ```
 
 Open:
-👉 `http://127.0.0.1:8000`
+ `http://127.0.0.1:8000`
 
 ---
 
-## 🔑 Authentication
+## Authentication
 
 StuddyBuddy supports:
 
@@ -150,7 +150,7 @@ Powered by **django-allauth**.
 
 ---
 
-## 👥 Who Is This For?
+## Who Is This For?
 
 * Students
 * Beginners
@@ -160,13 +160,13 @@ Powered by **django-allauth**.
 
 ---
 
-## 🆓 Is StuddyBuddy Free?
+## Is StuddyBuddy Free?
 
-✅ Yes — completely free to use.
+Yes — completely free to use.
 
 ---
 
-## 📌 Future Improvements
+## Future Improvements
 
 * Real-time WebSocket chat
 * Notifications
@@ -176,7 +176,7 @@ Powered by **django-allauth**.
 
 ---
 
-## 🙌 Acknowledgements
+## Acknowledgements
 
 Inspired by community-driven learning and open discussion platforms.
 
@@ -184,25 +184,16 @@ Built with ❤️ using Django.
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and free to use for learning purposes.
 
 ---
 
-## ⭐ Final Note
+## Final Note
 
 If you find this project helpful, consider giving it a ⭐ on GitHub!
 
-Happy learning 🚀
+Happy learning 
 
 ---
-
-If you want next:
-
-* GitHub **repo description**
-* **Project screenshots section**
-* Resume-ready **project explanation**
-* Deployment notes section
-
-Just tell me 👍
