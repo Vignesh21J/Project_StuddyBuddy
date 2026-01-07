@@ -276,10 +276,17 @@ a {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
-@media screen and (min-width: 500px) {
-    .mobile-menu {
+@media screen and (min-width: 1024px) {
+    .mobile-menuItems {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .topics {
         display: none;
     }
 }
@@ -428,6 +435,7 @@ a {
 }
 
 .topics__list li a span {
+    margin-left: 4rem;
     padding: 0.5rem 1rem;
     background-color: var(--color-dark);
     border-radius: 3px;
@@ -606,7 +614,7 @@ a {
 /*==================== Header Section =======================*/
 
 .header {
-    padding: 2rem;  
+    padding: 2rem;
     border-radius: 10px;
     background-color: var(--color-dark);
 }
@@ -620,8 +628,19 @@ a {
 }
 
 .header > .container {
+    width: 100%;
+}
+
+.header__about {
     display: flex;
-    gap: 9.5rem;
+    align-items: center;
+    height: 100%;
+    font-weight: 500;
+    color: var(--color-gray);
+}
+
+.header__about:hover {
+    color: var(--color-main);
 }
 
 
@@ -691,15 +710,21 @@ a {
 
 .header__menu {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8rem;
 }
 
 .header__menu a {
     display: flex;
     gap: 1.1rem;
     align-items: center;
+    font-size: 16px;
     font-weight: 500;
     text-decoration: none;
     color: var(--color-gray);
+    white-space: nowrap;
 }
 
 .header__menu img {
@@ -731,8 +756,75 @@ a {
 }
 
 .dropdown-button:hover svg {
-    fill: var(--color-main);  
+    fill: var(--color-main);
 }
+
+
+/* ================= ABOUT PAGE ================= */
+
+.about {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 2rem;
+}
+
+.about__container {
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--color-dark);
+    padding: 4rem;
+    border-radius: 10px;
+}
+
+/* Headings */
+.about__container h1 {
+    font-size: 2.8rem;
+    color: var(--color-light);
+    margin-bottom: 2rem;
+}
+
+.about__container h2 {
+    font-size: 2rem;
+    color: var(--color-main);
+    margin-top: 3.5rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Paragraphs */
+.about__container p {
+    font-size: 1.6rem;
+    color: var(--color-light-gray);
+    line-height: 1.8;
+    margin-bottom: 1.4rem;
+}
+
+/* Lists */
+.about__container ul {
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.about__container li {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--color-light-gray);
+}
+
+/* Highlight important text */
+.about__container strong {
+    color: var(--color-light);
+    font-weight: 600;
+}
+
+/* CTA Button */
+.about__container .btn {
+    margin-top: 3rem;
+    display: inline-block;
+}
+
+
+
+
 
 
 /*============== Layout ==============*/
@@ -767,6 +859,7 @@ a {
     margin-left: 2rem;
   }
 }
+
 
 
 
@@ -1017,7 +1110,7 @@ a {
 =>  Room
 ================================*/
 
-.room, 
+.room,
 .participants {
     background: var(--color-dark);
     max-height: 87.5vh;
@@ -1294,7 +1387,7 @@ a {
 .chat-page-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 80px); 
+    height: calc(100vh - 80px);
     padding: 8px;
     position: relative;
     overflow: hidden;

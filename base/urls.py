@@ -14,5 +14,4 @@ urlpatterns = [
     path('topics/', views.TopicPage , name="topics"),
 
     path('about/', views.AboutView, name='about'),
-
 ]

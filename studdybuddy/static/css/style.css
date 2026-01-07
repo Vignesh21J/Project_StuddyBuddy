@@ -435,6 +435,7 @@ a {
 }
 
 .topics__list li a span {
+    margin-left: 4rem;
     padding: 0.5rem 1rem;
     background-color: var(--color-dark);
     border-radius: 3px;
@@ -613,7 +614,7 @@ a {
 /*==================== Header Section =======================*/
 
 .header {
-    padding: 2rem;  
+    padding: 2rem;
     border-radius: 10px;
     background-color: var(--color-dark);
 }
@@ -755,7 +756,7 @@ a {
 }
 
 .dropdown-button:hover svg {
-    fill: var(--color-main);  
+    fill: var(--color-main);
 }
 
 
@@ -1108,7 +1109,7 @@ a {
 =>  Room
 ================================*/
 
-.room, 
+.room,
 .participants {
     background: var(--color-dark);
     max-height: 87.5vh;
@@ -1385,7 +1386,7 @@ a {
 .chat-page-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 80px); 
+    height: calc(100vh - 80px);
     padding: 8px;
     position: relative;
     overflow: hidden;

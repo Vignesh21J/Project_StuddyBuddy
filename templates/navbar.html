@@ -9,13 +9,13 @@
                     <img src="{% static 'images/logo.svg' %}" alt="Logo" />
                     <h1>StuddyBuddy</h1>
                 </a>
+	    </div>	
 
-            </div>        
 
             <nav class="header__menu">
 
                 <a href="{% url 'about' %}" class="header__about">About</a>
-            
+
                 {% if request.user.is_authenticated %}
                     <div class="header__user">
 
@@ -42,7 +42,7 @@
 
                 {% endif %}
 
-                
+
 
                 <div class="dropdown-menu">
                     {% if request.user.is_authenticated %}
@@ -83,6 +83,6 @@
 
             </nav>
         </div>
-        
+
     </div>
 </header>

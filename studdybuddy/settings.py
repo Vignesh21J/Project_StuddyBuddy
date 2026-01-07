@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['studdybuddy.pythonanywhere.com']
 
 
 # Application definition
@@ -68,7 +68,7 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',    
+    'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -94,7 +94,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': config('OAUTH_GITHUB_SECRET'),
         },
         'AUTH_PARAMS': {
-            'prompt': 'consent',  
+            'prompt': 'consent',
         },
     },
 }
@@ -211,3 +211,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

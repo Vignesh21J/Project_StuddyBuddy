@@ -15,7 +15,7 @@ class CustomUserAdmin(UserAdmin):
         "date_joined",
     )
 
-    ordering = ("email",)
+    ordering = ("-date_joined",)
 
     fieldsets = UserAdmin.fieldsets + (
         (None, {
@@ -40,5 +40,5 @@ class PasswordResetAdmin(admin.ModelAdmin):
 
     def get_username(self, obj):
         return obj.user.username
-    
+
     get_username.short_description = 'Username'

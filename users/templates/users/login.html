@@ -28,14 +28,14 @@
 
                         <div class="form__group">
                             <label>Email</label>
-                            <input type="email" name="username" placeholder="Enter Your Email Address" />
+                            <input type="email" name="username" placeholder="Enter your email address" />
                         </div>
 
                         <div class="form__group">
                             <label for="password">Password</label>
 
                             <div class="password-wrapper">
-                                <input type="password" name="password" id="password" placeholder="Enter Your Password"
+                                <input type="password" name="password" id="password" placeholder="Enter password"
                                 />
                                 <i class="bi bi-eye toggle-password" data-target="password"></i>
                             </div>
@@ -67,10 +67,10 @@
                         <p>Haven't signed up yet? <a href="{% url 'register' %}" class="btn btn--link">Register</a></p>
                         <p>Forgot your password? <a href="{% url 'forgot-password' %}" class="btn btn--link">Forgot Password</a></p>
                     </div>
-                    {% include "users/social_logins.html" %}             
+                    {% include "users/social_logins.html" %}
                 </div>
             </div>
         </div>
     </main>
-    
+
 {% endblock content %}

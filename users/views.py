@@ -10,7 +10,7 @@ from .forms import RegisterUserForm
 
 from .forms import LoginUserForm
 
-from base.models import Room, Topic
+from base.models import Topic
 
 from .forms import EditUserForm
 from django.contrib.auth.decorators import login_required
@@ -27,18 +27,21 @@ from django.db.models import Count
 
 from django_ratelimit.decorators import ratelimit
 
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST
+
 
 # Create your views here.
 
 @unauthenticated_user
 def RegisterView(request):
-    
+
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
 
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, "Account created Successfully..!")
             return redirect('home')
         else:
@@ -57,7 +60,7 @@ def RegisterView(request):
 def LoginView(request):
 
     next_url = request.GET.get('next') or request.POST.get('next')
-    
+
     if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
 
@@ -68,9 +71,9 @@ def LoginView(request):
 
             if next_url:
                 return redirect(resolve_url(next_url))
-            
+
             return redirect("home")
-        
+
         else:
             messages.error(request, "Invalid email or password")
     else:
@@ -80,18 +83,16 @@ def LoginView(request):
         "form": form,
         "next": next_url
     }
-    
+
     return render(request, "users/login.html", context)
 
 
+@require_POST
 def LogoutView(request):
 
     if not request.user.is_authenticated:
         return redirect('login')
-    
-    if request.method != 'POST':
-        return render(request,'405.html', status=405)
-    
+
     logout(request)
     messages.success(request, "Logged out successfully.")
     return redirect('login')
@@ -101,7 +102,7 @@ def LogoutView(request):
 def UserProfile(request, pk):
 
     user = get_object_or_404(User, id=pk)
-    
+
     rooms = (
         user.room_set
         .select_related("host", "topic")
@@ -111,7 +112,7 @@ def UserProfile(request, pk):
 
     rooms_count = rooms.count()
     topics = Topic.objects.all()
-    
+
     context = {
         'user':user,
         'rooms':rooms,
@@ -212,7 +213,7 @@ def ResetPassword(request, reset_id):
                 reset_entry.delete()
                 messages.error(request, 'Reset link has expired')
                 return redirect('forgot-password')
-            
+
             if not password_have_error:
                 user = reset_entry.user
                 user.set_password(password)
@@ -220,11 +221,11 @@ def ResetPassword(request, reset_id):
                 reset_entry.delete()
                 messages.success(request, 'Password reset. Proceed to login.')
                 return redirect('login')
-            
+
             return render(request, 'users/reset_password.html', {'reset_id': reset_entry.reset_id})
 
     except PasswordReset.DoesNotExist:
         messages.error(request, 'Invalid reset id')
         return redirect('forgot-password')
-    
+
     return render(request, 'users/reset_password.html', {'reset_id':reset_id})

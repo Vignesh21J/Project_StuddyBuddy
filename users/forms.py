@@ -16,7 +16,7 @@ class RegisterUserForm(UserCreationForm):
         }
         widgets = {
             "username": forms.TextInput(attrs={
-                "placeholder": "Enter your Username"
+                "placeholder": "Enter your username"
             }),
             "email": forms.EmailInput(attrs={
                 "placeholder": "Enter your email address"
@@ -32,7 +32,7 @@ class RegisterUserForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         return email.strip().lower()
-    
+
 
 class LoginUserForm(AuthenticationForm):
     username = forms.EmailField(label="Email")

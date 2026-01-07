@@ -7,10 +7,10 @@
 {% load static %}
 
 {% block content %}
-    
+
     <main class="profile-page layout layout--3">
         <div class="container">
-            
+
             <div class="roomList">
                 <div class="profile">
 
@@ -22,11 +22,11 @@
 
                     <div class="profile__info">
                         <h3>{{ user.username }}</h3>
-                        
+
                         {% if request.user == user %}
-                            <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>  
+                            <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
                         {% endif %}
-                        
+
                     </div>
                     <div class="profile__about">
                         <h3>About</h3>
@@ -38,19 +38,19 @@
 
                 <div class="roomList__header">
                     <div>
-                        <h2>Totally <strong>{{ rooms_count }}</strong> Study 
-                            {% if rooms_count == 1 %}
-                              Room 
+                        <h2>Totally <strong>{{ rooms_count }}</strong> Study
+                            {% if rooms_count == 0 or rooms_count == 1 %}
+                              Room
                             {% else %}
-                                Rooms 
+                                Rooms
                             {% endif %}
                             Hosted by <a>{{user.username}}</a>
                         </h2>
                     </div>
                 </div>
-                
+
                 {% include "base/feed_component.html" %}
-                
+
             </div>
 
         </div>

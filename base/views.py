@@ -26,7 +26,7 @@ from django_ratelimit.decorators import ratelimit
 # Create your views here.
 def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    
+
     topics = Topic.objects.all()[0:6]
 
     rooms = (
@@ -38,7 +38,7 @@ def Home(request):
             Q(name__icontains=q) |
             Q(description__icontains=q)
         )
-    )
+    ).order_by('-created')
 
     room_count = rooms.count()
     topics_count = Topic.objects.count()
@@ -83,12 +83,12 @@ def GetRoom(request, pk):
         if not body and not uploaded_files:
             messages.error(request, "You can't send an empty message.")
             return redirect('room', pk=room.id)
-        
+
         for file in uploaded_files:
             if not any(file.name.lower().endswith(ext) for ext in ALLOWED_EXTENSIONS):
                 errors_found = True
                 messages.error(request, f"{file.name} has an unsupported file type.")
-                
+
             elif file.size > MAX_UPLOAD_SIZE:
                 errors_found = True
                 messages.error(request, f"{file.name} exceeds maximum size of 10MB.")
@@ -105,7 +105,7 @@ def GetRoom(request, pk):
         for file in uploaded_files:
             MessageFile.objects.create(file=file, message=message)
 
-        
+
         room.participants.add(request.user)
 
         return redirect('room', pk=room.id)
@@ -114,6 +114,7 @@ def GetRoom(request, pk):
 
     return render(request, 'base/room.html', context)
 
+
 @login_required
 @ratelimit(key='user', rate='30/h', block=True)
 def CreateRoom(request):
@@ -121,21 +122,27 @@ def CreateRoom(request):
     topics = Topic.objects.only("id","name")
 
     if request.method == 'POST':
-        topic_name = request.POST.get('topic_entered')
-        topic, created = Topic.objects.get_or_create(name=topic_name)
+        topic_name = request.POST.get('topic_entered', '').strip()
+        name = request.POST.get('name', '').strip()
+        description = request.POST.get('description', '').strip()
+
+        if not topic_name or not name:
+            messages.error(request, "Topic and room name are required.")
+            return redirect('create-room')
+
+        topic, _ = Topic.objects.get_or_create(name=topic_name)
 
         room = Room.objects.create(
-            host = request.user,
-            topic = topic,
-
-            name = request.POST.get('name'),
-            description = request.POST.get('description')
+            host=request.user,
+            topic=topic,
+            name=name,
+            description=description
         )
         room.participants.add(request.user)
-        return redirect('home')
+        return redirect('room',pk=room.id)
 
-    else:
-        form = RoomForm()
+
+    form = RoomForm()
 
     context = {
         'form':form,
@@ -147,30 +154,43 @@ def CreateRoom(request):
 @login_required
 def UpdateRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
-    form = RoomForm(instance=room)
-
-    topics = Topic.objects.all()
 
     if request.user != room.host:
         messages.error(request, 'You are not allowed to edit this room.')
         return redirect('room', pk=room.id)
 
-    if request.method == 'POST':
-        topic_name = request.POST.get('topic_entered')
-        topic, created = Topic.objects.get_or_create(name=topic_name)
+    topics = Topic.objects.only("id", "name")
+    form = RoomForm(instance=room)
 
-        room.name = request.POST.get('name')
+
+    if request.method == 'POST':
+        topic_name = request.POST.get('topic_entered', '').strip()
+        name = request.POST.get('name', '').strip()
+        description = request.POST.get('description', '').strip()
+
+        if not topic_name or not name:
+            messages.error(request, "Topic and room name are required.")
+            return redirect('update-room', pk=room.id)
+
+        topic, _ = Topic.objects.get_or_create(name=topic_name)
+
+        room.name = name
         room.topic = topic
-        room.description = request.POST.get('description')
+        room.description = description
         room.save()
-        return redirect('room', room.id)
+
+        return redirect('room', pk=room.id)
+
     context = {
         'form':form,
         'topics':topics,
         'room':room
     }
-    
+
     return render(request, 'base/room_form.html', context)
+
+
+
 
 
 @login_required
@@ -180,11 +200,11 @@ def DeleteRoom(request, pk):
     if request.user != room.host:
         messages.error(request, 'You are not allowed to delete this room.')
         return redirect('room', pk=room.id)
-    
+
     if request.method == 'POST':
         room.delete()
         return redirect('home')
-    
+
     context = {
         'obj':room
     }
@@ -193,7 +213,7 @@ def DeleteRoom(request, pk):
 @login_required
 def DeleteMessage(request, pk):
     message = get_object_or_404(Message, id=pk)
-    
+
     if request.user == message.user:
         room_id = message.room.id
 
@@ -213,10 +233,10 @@ def DeleteFile(request, file_id):
 
     if file.message.user != request.user:
         raise PermissionDenied
-    
+
     room_id = file.message.room.id
     file.delete()
-    
+
     return redirect('room', pk=room_id)
 
 
@@ -245,4 +265,17 @@ def ratelimit_blocked(request, exception):
 
 
 def AboutView(request):
+<<<<<<< HEAD
     return render(request, 'about.html')
+=======
+    return render(request, 'about.html')
+
+
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
+
+def custom_403(request, exception):
+    return render(request, '403.html', status=403)
+
+def custom_500(request):
+    return render(request, '500.html', status=500)
