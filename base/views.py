@@ -242,3 +242,7 @@ def TopicPage(request):
 
 def ratelimit_blocked(request, exception):
     return render(request, '429.html', status=429)
+
+
+def AboutView(request):
+    return render(request, 'about.html')

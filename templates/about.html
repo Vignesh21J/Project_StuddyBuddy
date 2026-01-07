@@ -1,0 +1,72 @@
+{% extends "main.html" %}
+
+{% block title %}
+    About - StuddyBuddy
+{% endblock title %}
+
+{% block content %}
+<section class="about">
+
+    <div class="about__container">
+        <h1>About StuddyBuddy</h1>
+
+        <p>
+            <strong>StuddyBuddy</strong> is an online learning and discussion platform
+            where people can learn together by joining
+            <strong>public study rooms</strong> based on different topics.
+        </p>
+
+        <p>
+            Instead of learning alone, you can connect with others who are studying
+            the same subject, ask questions, share ideas, and grow together.
+        </p>
+
+        <h2>What can you do on StuddyBuddy?</h2>
+        <ul>
+            <li>Create an account using email/password or Google/GitHub</li>
+            <li>Browse public topics and study rooms</li>
+            <li>Join any room and start chatting</li>
+            <li>Send messages and share files</li>
+            <li>Create new rooms under existing or new topics</li>
+        </ul>
+
+        <h2>Important Note</h2>
+        <p>
+            All rooms and topics on StuddyBuddy are <strong>public</strong>.
+            There are no private rooms.
+        </p>
+        <p>
+            This helps everyone discover discussions easily and learn in an open,
+            collaborative environment.
+        </p>
+
+        <h2>Why StuddyBuddy?</h2>
+        <p>
+            Learning alone can feel confusing and unmotivating.
+            StuddyBuddy makes learning social by bringing people together
+            to share knowledge, ask questions, and support each other.
+        </p>
+
+        <h2>Who is this for?</h2>
+        <p>
+            StuddyBuddy is for everyone — students, beginners, self-learners,
+            and developers who want to learn and discuss topics together.
+        </p>
+
+        <h2>Is StuddyBuddy free?</h2>
+        <p>
+            Yes. StuddyBuddy is completely free to use.
+        </p>
+
+        <h2>Get Started</h2>
+        <p>
+            Browse topics, join a study room, and start learning with others today.
+        </p>
+
+        <a href="{% url 'home' %}" class="btn btn--main">
+            Go to Study Rooms
+        </a>
+    </div>
+
+</section>
+{% endblock content %}

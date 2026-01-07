@@ -12,4 +12,7 @@ urlpatterns = [
     path('delete-file/<int:file_id>/', views.DeleteFile, name='delete-file'),
 
     path('topics/', views.TopicPage , name="topics"),
+
+    path('about/', views.AboutView, name='about'),
+
 ]
