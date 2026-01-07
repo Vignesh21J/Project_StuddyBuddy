@@ -265,9 +265,6 @@ def ratelimit_blocked(request, exception):
 
 
 def AboutView(request):
-<<<<<<< HEAD
-    return render(request, 'about.html')
-=======
     return render(request, 'about.html')
 
 
