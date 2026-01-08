@@ -162,16 +162,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-EMAIL_BACKEND=config('EMAIL_BACKEND')
-EMAIL_HOST=config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
-
-
 ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
 SOCIALACCOUNT_ADAPTER = "users.adapters.MySocialAccountAdapter"
 
