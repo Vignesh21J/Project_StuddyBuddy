@@ -231,7 +231,7 @@
                             {% csrf_token %}
 
                             <div class="chat-input-wrapper">
-                                <input type="text" name="body" placeholder="Type your message..." class="chat-input" />
+                                <textarea name="body" id="chat-textarea" placeholder="Type your message..." rows="1" class="chat-input"></textarea>
 
                                 <input type="file" name="files" id="file-upload" accept=".jpg,.jpeg,.png,.gif,.pdf,.mp4,.mp3,.wav" class="file-input" multiple />
 

@@ -1441,6 +1441,8 @@ a {
     color: white;
     font-size: 14px;
     outline: none;
+    overflow: hidden;
+    resize: none;
 }
 
 .file-input {
@@ -1482,9 +1484,9 @@ i.bi {
 
 
 
-@media screen and (max-width: 394px) and (min-width: 324px) {
+@media screen and (max-width: 394px) and (min-width: 300px) {
     .chat-input-wrapper {
-        justify-content: center;
+        justify-content: end;
         align-items: center;
         max-height: 70px;
     }
