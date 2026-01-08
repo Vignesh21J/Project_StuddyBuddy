@@ -66,3 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const conversationThread = document.querySelector(".room__box");
 if (conversationThread) conversationThread.scrollTop = conversationThread.scrollHeight;
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".message__text a").forEach(link => {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+    });
+});
