@@ -74,3 +74,18 @@ document.addEventListener("DOMContentLoaded", function () {
         link.setAttribute("rel", "noopener noreferrer");
     });
 });
+
+
+const textarea = document.getElementById("chat-textarea");
+const form = document.querySelector(".chat-form");
+
+textarea.addEventListener("keydown", function (event) {if (event.key === "Enter") {
+        if (event.shiftKey) {
+            return
+        }
+        else {
+            event.preventDefault();
+            form.submit();
+        }
+    }
+});
