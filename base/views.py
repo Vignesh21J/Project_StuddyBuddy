@@ -35,7 +35,7 @@ def Home(request):
         Room.objects.select_related('host','topic')
         .prefetch_related('participants')
         .annotate(
-            participants_count=Count("participants"),
+            participants_count=Count("participants", distinct=True),
             last_activity=Coalesce(Max('message__created'), 'created')
         )
         .filter(
