@@ -19,6 +19,8 @@ from .models import MessageFile
 # connection.queries.clear()
 
 from django.db.models import Count
+from django.db.models import Max
+from django.db.models.functions import Coalesce
 
 from django_ratelimit.decorators import ratelimit
 
@@ -32,13 +34,16 @@ def Home(request):
     rooms = (
         Room.objects.select_related('host','topic')
         .prefetch_related('participants')
-        .annotate(participants_count=Count("participants"))
+        .annotate(
+            participants_count=Count("participants"),
+            last_activity=Coalesce(Max('message__created'), 'created')
+        )
         .filter(
             Q(topic__name__icontains=q) |
             Q(name__icontains=q) |
             Q(description__icontains=q)
         )
-    ).order_by('-created')
+    ).order_by('-last_activity')
 
     room_count = rooms.count()
     topics_count = Topic.objects.count()
@@ -66,9 +71,10 @@ def GetRoom(request, pk):
         ),
         id=pk
     )
+
     room_messages = room.message_set.all().order_by('created')
     participants = room.participants.all()
-
+    
 
     if request.method == 'POST':
 
