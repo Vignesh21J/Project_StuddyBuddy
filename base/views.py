@@ -197,8 +197,6 @@ def UpdateRoom(request, pk):
 
 
 
-
-
 @login_required
 def DeleteRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
@@ -231,6 +229,7 @@ def DeleteMessage(request, pk):
     #     return HttpResponseForbidden("You're not allowed to delete this message.")
 
     raise PermissionDenied
+
 
 
 @login_required()
