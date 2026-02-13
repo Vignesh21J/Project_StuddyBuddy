@@ -1,6 +1,6 @@
 # StuddyBuddy
 
-**StuddyBuddy** is a full-stack Django web application where people can learn together by joining **public study rooms** based on different topics.
+**StuddyBuddy** is a Django web application where people can learn together by joining **common study rooms** based on different topics.
 
 It allows users to discuss, share ideas, and collaborate openly instead of learning alone.
 
@@ -35,13 +35,14 @@ This design encourages **open learning**, discovery of discussions, and communit
 
 * **Python**
 * **Django**
-* **SQLite** (can be replaced with PostgreSQL)
+* **SQLite** (For scaling, it can be replaced with PostgreSQL)
 * **Django Allauth** (authentication & social login)
 
 ### Frontend
 
 * HTML
-* CSS (custom, no frameworks)
+* CSS (custom)
+* Bootstrap icons
 * Responsive layout
 
 ### Deployment
@@ -100,11 +101,6 @@ Create a `.env` file and add:
 SECRET_KEY=your_secret_key
 DEBUG=True
 
-EMAIL_HOST=your_email_host
-EMAIL_PORT=your_email_port
-EMAIL_HOST_USER=your_email
-EMAIL_HOST_PASSWORD=your_email_password
-
 OAUTH_GOOGLE_CLIENT_ID=your_google_client_id
 OAUTH_GOOGLE_SECRET=your_google_secret
 
@@ -144,7 +140,6 @@ StuddyBuddy supports:
 * Email & password login
 * Google OAuth
 * GitHub OAuth
-* Password reset via email
 
 Powered by **django-allauth**.
 
@@ -154,7 +149,6 @@ Powered by **django-allauth**.
 
 * Students
 * Beginners
-* Self-learners
 * Developers
 * Anyone who wants to learn **together instead of alone**
 
